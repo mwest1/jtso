@@ -7,9 +7,7 @@ COPY . /build
 WORKDIR /build
 
 COPY go.mod go.sum ./
-RUN export GOPROXY=https://proxy.golang.org,https://goproxy.io,direct
-RUN apk add --no-cache ca-certificates
-
+RUN go mod download
 
 RUN CGO_CFLAGS="-D_LARGEFILE64_SOURCE" go build -o ./jtso -ldflags "${LDFLAGS}" ./main.go 
 
