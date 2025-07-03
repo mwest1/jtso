@@ -8,6 +8,8 @@ WORKDIR /build
 
 COPY go.mod go.sum ./
 
+RUN apk add --no-cache ca-certificates
+
 
 RUN CGO_CFLAGS="-D_LARGEFILE64_SOURCE" go build -o ./jtso -ldflags "${LDFLAGS}" ./main.go 
 
