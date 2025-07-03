@@ -7,7 +7,7 @@ COPY . /build
 WORKDIR /build
 
 COPY go.mod go.sum ./
-
+RUN export GOPROXY=https://proxy.golang.org,https://goproxy.io,direct
 RUN apk add --no-cache ca-certificates
 
 
