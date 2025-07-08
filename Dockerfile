@@ -8,6 +8,7 @@ RUN apk --update --no-cache add git build-base gcc
 COPY . /build
 WORKDIR /build
 
+RUN go env -w GOPROXY=http://proxy.golang.org
 COPY go.mod go.sum ./
 RUN go mod download
 
