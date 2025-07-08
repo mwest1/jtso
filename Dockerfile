@@ -1,6 +1,8 @@
 FROM golang:alpine as builder
 ARG LDFLAGS=""
 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.22/main" > /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.22/community" >> /etc/apk/repositories
 RUN apk --update --no-cache add git build-base gcc
 
 COPY . /build
@@ -13,6 +15,8 @@ RUN CGO_CFLAGS="-D_LARGEFILE64_SOURCE" go build -o ./jtso -ldflags "${LDFLAGS}" 
 
 FROM alpine:latest
 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.22/main" > /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.22/community" >> /etc/apk/repositories
 RUN apk update --no-cache 
 
 USER 0
